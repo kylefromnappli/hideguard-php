@@ -1,0 +1,221 @@
+{
+  "cases": [
+    {
+      "expected": true,
+      "value": "4242424242424242"
+    },
+    {
+      "expected": true,
+      "value": "4242 4242 4242 4242"
+    },
+    {
+      "expected": true,
+      "value": "4242-4242-4242-4242"
+    },
+    {
+      "expected": true,
+      "value": "4242_4242_4242_4242"
+    },
+    {
+      "expected": true,
+      "value": "4242.4242.4242.4242"
+    },
+    {
+      "expected": true,
+      "value": "4242:4242:4242:4242"
+    },
+    {
+      "expected": true,
+      "value": "4242/4242/4242/4242"
+    },
+    {
+      "expected": true,
+      "value": "card 4111111111111111 here"
+    },
+    {
+      "expected": false,
+      "value": "4242424242424241"
+    },
+    {
+      "expected": false,
+      "value": "424242424242"
+    },
+    {
+      "expected": false,
+      "value": "cs_live_a1B2c3d4E5f6"
+    },
+    {
+      "expected": true,
+      "value": "pi_3NkX4242424242424242"
+    },
+    {
+      "expected": true,
+      "value": "evt_4242424242424242"
+    },
+    {
+      "expected": false,
+      "value": "HDPX00001234DP567"
+    },
+    {
+      "expected": false,
+      "value": "fp_abc123"
+    },
+    {
+      "expected": false,
+      "value": "4242a4242b4242c4242"
+    },
+    {
+      "expected": true,
+      "value": "Tiếng Việt 4242 4242 4242 4242"
+    },
+    {
+      "expected": false,
+      "value": ""
+    },
+    {
+      "expected": true,
+      "value": 4242424242424242
+    },
+    {
+      "expected": true,
+      "value": 1234567890123
+    },
+    {
+      "expected": false,
+      "value": 123456789012
+    },
+    {
+      "expected": false,
+      "value": 4242
+    },
+    {
+      "expected": false,
+      "value": 0
+    },
+    {
+      "expected": true,
+      "value": -4242424242424242
+    },
+    {
+      "expected": false,
+      "value": 12.5
+    },
+    {
+      "expected": false,
+      "value": 4242424242.5
+    },
+    {
+      "expected": false,
+      "value": true
+    },
+    {
+      "expected": false,
+      "value": false
+    },
+    {
+      "expected": false,
+      "value": null
+    },
+    {
+      "expected": true,
+      "value": [
+        "fp_1",
+        "4242424242424242"
+      ]
+    },
+    {
+      "expected": false,
+      "value": [
+        "fp_1",
+        "fp_2"
+      ]
+    },
+    {
+      "expected": true,
+      "value": {
+        "number": 4242424242424242
+      }
+    },
+    {
+      "expected": true,
+      "value": {
+        "4242424242424242": "key is a card"
+      }
+    },
+    {
+      "expected": false,
+      "value": {
+        "brand": "visa",
+        "country": "VN"
+      }
+    },
+    {
+      "expected": false,
+      "value": []
+    },
+    {
+      "expected": false,
+      "value": {}
+    },
+    {
+      "expected": false,
+      "value": {
+        "inner": {
+          "inner": {
+            "inner": {
+              "inner": {
+                "inner": {
+                  "inner": {
+                    "inner": "x"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "expected": false,
+      "value": {
+        "inner": {
+          "inner": {
+            "inner": {
+              "inner": {
+                "inner": {
+                  "inner": {
+                    "inner": {
+                      "inner": "x"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "expected": true,
+      "value": {
+        "inner": {
+          "inner": {
+            "inner": {
+              "inner": {
+                "inner": {
+                  "inner": {
+                    "inner": {
+                      "inner": {
+                        "inner": "x"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+    "name": "hideguard/php",
+    "description": "Server-side client for HideGuard: ask for a verdict before charging, report payment outcomes, verify signed collect replies.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["hideguard", "fraud", "card-testing", "fingerprint", "payments", "verdict"],
+    "homepage": "https://hideguard.io",
+    "authors": [
+        {
+            "name": "Hideguard, Inc.",
+            "homepage": "https://hideguard.io"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.5",
+        "ext-json": "*"
+    },
+    "suggest": {
+        "ext-curl": "The default transport. Without it, PHP's HTTP stream wrapper is used, whose timeout bounds each read rather than the whole call.",
+        "ext-sodium": "Required to verify signed replies (bundled with PHP 7.2+). paragonie/sodium_compat works too."
+    },
+    "autoload": {
+        "psr-4": {
+            "HideGuard\\": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "scripts": {
+        "test": "php tests/run.php"
+    },
+    "archive": {
+        "exclude": ["/tests"]
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

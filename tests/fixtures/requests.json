@@ -1,0 +1,751 @@
+{
+  "endpoint": "https://hideguard.io",
+  "secret": "sk_test_fixture_0123456789",
+  "userAgent": "hideguard-sdk-fixture/1",
+  "verdict": [
+    {
+      "input": {},
+      "name": "empty",
+      "request": {
+        "body": "{}",
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1",
+          "content-type": "application/json",
+          "x-api-key": "sk_test_fixture_0123456789"
+        },
+        "method": "POST",
+        "url": "https://hideguard.io/api/v1/verdict"
+      }
+    },
+    {
+      "input": {
+        "headers": {
+          "Accept-Language": "vi-VN,vi;q=0.9",
+          "authorization": "Bearer never-sent",
+          "cookie": "session=never-sent",
+          "sec-ch-ua": "\"Chromium\";v=\"157\", \"Google Chrome\";v=\"157\"",
+          "sec-fetch-mode": "navigate",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/157.0.0.0 Safari/537.36"
+        },
+        "ip": "203.0.113.7",
+        "requestId": "3f1c2a4e-0000-4000-8000-000000000001",
+        "visitorId": "5f3a9c1e2b7d4a608e1c3b5d7f9a2c4e"
+      },
+      "name": "headers record: three forwarded, user agent taken from it, cookie and authorization dropped",
+      "request": {
+        "body": "{\"requestId\":\"3f1c2a4e-0000-4000-8000-000000000001\",\"visitorId\":\"5f3a9c1e2b7d4a608e1c3b5d7f9a2c4e\",\"ip\":\"203.0.113.7\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/157.0.0.0 Safari/537.36\",\"headers\":{\"accept-language\":\"vi-VN,vi;q=0.9\",\"sec-ch-ua\":\"\\\"Chromium\\\";v=\\\"157\\\", \\\"Google Chrome\\\";v=\\\"157\\\"\",\"sec-fetch-mode\":\"navigate\"}}",
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1",
+          "content-type": "application/json",
+          "x-api-key": "sk_test_fixture_0123456789"
+        },
+        "method": "POST",
+        "url": "https://hideguard.io/api/v1/verdict"
+      }
+    },
+    {
+      "input": {
+        "headers": {
+          "accept-language": [
+            "en-US",
+            "en"
+          ],
+          "x-other": "1"
+        },
+        "userAgent": "explicit-agent"
+      },
+      "name": "header arrays are joined; an explicit userAgent wins over the header",
+      "request": {
+        "body": "{\"userAgent\":\"explicit-agent\",\"headers\":{\"accept-language\":\"en-US, en\"}}",
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1",
+          "content-type": "application/json",
+          "x-api-key": "sk_test_fixture_0123456789"
+        },
+        "method": "POST",
+        "url": "https://hideguard.io/api/v1/verdict"
+      }
+    },
+    {
+      "input": {
+        "headers": {},
+        "ip": null,
+        "requestId": null
+      },
+      "name": "an empty headers record still sends an empty block; nulls travel",
+      "request": {
+        "body": "{\"requestId\":null,\"ip\":null,\"headers\":{}}",
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1",
+          "content-type": "application/json",
+          "x-api-key": "sk_test_fixture_0123456789"
+        },
+        "method": "POST",
+        "url": "https://hideguard.io/api/v1/verdict"
+      }
+    },
+    {
+      "input": {
+        "payment": {
+          "accountRef": "user-1234",
+          "amount": 49.99,
+          "card": "fp_abc123",
+          "currency": "USD",
+          "method": "stripe",
+          "provider": "VCB",
+          "reference": "cs_live_a1B2c3"
+        }
+      },
+      "name": "payment block, every field",
+      "request": {
+        "body": "{\"payment\":{\"card\":\"fp_abc123\",\"amount\":49.99,\"currency\":\"USD\",\"reference\":\"cs_live_a1B2c3\",\"method\":\"stripe\",\"provider\":\"VCB\",\"accountRef\":\"user-1234\"}}",
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1",
+          "content-type": "application/json",
+          "x-api-key": "sk_test_fixture_0123456789"
+        },
+        "method": "POST",
+        "url": "https://hideguard.io/api/v1/verdict"
+      }
+    },
+    {
+      "input": {
+        "payment": {
+          "amount": 0,
+          "reference": "HDPX00001234DP567",
+          "method": "bank"
+        }
+      },
+      "name": "payment block keeps the caller's key order out of the picture: the route's order is used",
+      "request": {
+        "body": "{\"payment\":{\"amount\":0,\"reference\":\"HDPX00001234DP567\",\"method\":\"bank\"}}",
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1",
+          "content-type": "application/json",
+          "x-api-key": "sk_test_fixture_0123456789"
+        },
+        "method": "POST",
+        "url": "https://hideguard.io/api/v1/verdict"
+      }
+    },
+    {
+      "input": {
+        "payment": {
+          "card": "fp_1",
+          "extra": "never sent",
+          "gateway": {
+            "id": 1
+          }
+        }
+      },
+      "name": "unknown payment keys never travel",
+      "request": {
+        "body": "{\"payment\":{\"card\":\"fp_1\"}}",
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1",
+          "content-type": "application/json",
+          "x-api-key": "sk_test_fixture_0123456789"
+        },
+        "method": "POST",
+        "url": "https://hideguard.io/api/v1/verdict"
+      }
+    },
+    {
+      "input": {
+        "payment": {}
+      },
+      "name": "an empty payment block is still a payment",
+      "request": {
+        "body": "{\"payment\":{}}",
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1",
+          "content-type": "application/json",
+          "x-api-key": "sk_test_fixture_0123456789"
+        },
+        "method": "POST",
+        "url": "https://hideguard.io/api/v1/verdict"
+      }
+    },
+    {
+      "input": {
+        "payment": null
+      },
+      "name": "payment null is no payment",
+      "request": {
+        "body": "{}",
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1",
+          "content-type": "application/json",
+          "x-api-key": "sk_test_fixture_0123456789"
+        },
+        "method": "POST",
+        "url": "https://hideguard.io/api/v1/verdict"
+      }
+    },
+    {
+      "input": {
+        "payment": {
+          "card": "4242 4242 4242 4242"
+        }
+      },
+      "name": "a card number in payment.card is refused",
+      "refusal": {
+        "field": "payment.card",
+        "kind": "card_number"
+      }
+    },
+    {
+      "input": {
+        "payment": {
+          "reference": "4242_4242_4242_4242"
+        }
+      },
+      "name": "a card number split by underscores in payment.reference is refused",
+      "refusal": {
+        "field": "payment.reference",
+        "kind": "card_number"
+      }
+    },
+    {
+      "input": {
+        "payment": {
+          "accountRef": "4111111111111111"
+        }
+      },
+      "name": "a card number in payment.accountRef is refused",
+      "refusal": {
+        "field": "payment.accountRef",
+        "kind": "card_number"
+      }
+    },
+    {
+      "input": {
+        "payment": "nope"
+      },
+      "name": "payment that is not an object is refused",
+      "refusal": {
+        "field": "payment",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "input": {
+        "headers": "nope"
+      },
+      "name": "headers that are not a record are refused",
+      "refusal": {
+        "field": "headers",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "input": {
+        "headers": {
+          "acceptLanguage": "fr-FR",
+          "secChUa": "\"Brave\";v=\"1\""
+        }
+      },
+      "name": "camel-case header names are read as a fallback",
+      "request": {
+        "body": "{\"headers\":{\"accept-language\":\"fr-FR\",\"sec-ch-ua\":\"\\\"Brave\\\";v=\\\"1\\\"\"}}",
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1",
+          "content-type": "application/json",
+          "x-api-key": "sk_test_fixture_0123456789"
+        },
+        "method": "POST",
+        "url": "https://hideguard.io/api/v1/verdict"
+      }
+    },
+    {
+      "input": {
+        "headers": {
+          "accept-language": "   "
+        }
+      },
+      "name": "a blank header is left out",
+      "request": {
+        "body": "{\"headers\":{}}",
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1",
+          "content-type": "application/json",
+          "x-api-key": "sk_test_fixture_0123456789"
+        },
+        "method": "POST",
+        "url": "https://hideguard.io/api/v1/verdict"
+      }
+    },
+    {
+      "input": {
+        "headers": {
+          "user-agent": "Tiếng Việt   /slash\u0001"
+        }
+      },
+      "name": "unicode, a line separator, a slash and a control character in a string",
+      "request": {
+        "body": "{\"userAgent\":\"Tiếng Việt   /slash\\u0001\",\"headers\":{}}",
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1",
+          "content-type": "application/json",
+          "x-api-key": "sk_test_fixture_0123456789"
+        },
+        "method": "POST",
+        "url": "https://hideguard.io/api/v1/verdict"
+      }
+    }
+  ],
+  "reportPayment": [
+    {
+      "input": {
+        "attemptId": "att_1",
+        "outcome": "approved"
+      },
+      "name": "attemptId",
+      "request": {
+        "body": "{\"attemptId\":\"att_1\",\"outcome\":\"approved\"}",
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1",
+          "content-type": "application/json",
+          "x-api-key": "sk_test_fixture_0123456789"
+        },
+        "method": "POST",
+        "url": "https://hideguard.io/api/v1/payments"
+      }
+    },
+    {
+      "input": {
+        "outcome": "abandoned",
+        "reference": "HDPX00001234DP567"
+      },
+      "name": "reference",
+      "request": {
+        "body": "{\"reference\":\"HDPX00001234DP567\",\"outcome\":\"abandoned\"}",
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1",
+          "content-type": "application/json",
+          "x-api-key": "sk_test_fixture_0123456789"
+        },
+        "method": "POST",
+        "url": "https://hideguard.io/api/v1/payments"
+      }
+    },
+    {
+      "input": {
+        "attemptId": "att_1",
+        "card": "fp_card",
+        "cardDetails": {
+          "brand": "VISA",
+          "country": "VN",
+          "cvcCheck": "pass",
+          "extra": "never sent",
+          "gatewayRiskScore": 12
+        },
+        "declineCode": "stolen_card",
+        "eventId": "evt_1",
+        "outcome": "declined",
+        "reference": "cs_live_x"
+      },
+      "name": "every field; unknown cardDetails keys dropped",
+      "request": {
+        "body": "{\"attemptId\":\"att_1\",\"reference\":\"cs_live_x\",\"outcome\":\"declined\",\"declineCode\":\"stolen_card\",\"card\":\"fp_card\",\"eventId\":\"evt_1\",\"cardDetails\":{\"brand\":\"VISA\",\"country\":\"VN\",\"cvcCheck\":\"pass\",\"gatewayRiskScore\":12}}",
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1",
+          "content-type": "application/json",
+          "x-api-key": "sk_test_fixture_0123456789"
+        },
+        "method": "POST",
+        "url": "https://hideguard.io/api/v1/payments"
+      }
+    },
+    {
+      "input": {
+        "cardDetails": null,
+        "outcome": "approved",
+        "reference": "r1"
+      },
+      "name": "cardDetails null travels as null",
+      "request": {
+        "body": "{\"reference\":\"r1\",\"outcome\":\"approved\",\"cardDetails\":null}",
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1",
+          "content-type": "application/json",
+          "x-api-key": "sk_test_fixture_0123456789"
+        },
+        "method": "POST",
+        "url": "https://hideguard.io/api/v1/payments"
+      }
+    },
+    {
+      "input": {
+        "cardDetails": {},
+        "outcome": "approved",
+        "reference": "r1"
+      },
+      "name": "an empty cardDetails is an empty object",
+      "request": {
+        "body": "{\"reference\":\"r1\",\"outcome\":\"approved\",\"cardDetails\":{}}",
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1",
+          "content-type": "application/json",
+          "x-api-key": "sk_test_fixture_0123456789"
+        },
+        "method": "POST",
+        "url": "https://hideguard.io/api/v1/payments"
+      }
+    },
+    {
+      "input": {
+        "attemptId": null,
+        "outcome": "approved",
+        "reference": "r1"
+      },
+      "name": "attemptId present but null travels, so the route can refuse it",
+      "request": {
+        "body": "{\"attemptId\":null,\"reference\":\"r1\",\"outcome\":\"approved\"}",
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1",
+          "content-type": "application/json",
+          "x-api-key": "sk_test_fixture_0123456789"
+        },
+        "method": "POST",
+        "url": "https://hideguard.io/api/v1/payments"
+      }
+    },
+    {
+      "input": {
+        "outcome": "approved"
+      },
+      "name": "neither attemptId nor reference",
+      "refusal": {
+        "field": "attemptId",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "input": {
+        "outcome": "approved",
+        "reference": "   "
+      },
+      "name": "a blank reference is no reference",
+      "refusal": {
+        "field": "attemptId",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "input": {
+        "outcome": "refunded",
+        "reference": "r1"
+      },
+      "name": "an unknown outcome",
+      "refusal": {
+        "field": "outcome",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "input": {
+        "card": "4242424242424242",
+        "outcome": "declined",
+        "reference": "r1"
+      },
+      "name": "a card number in card",
+      "refusal": {
+        "field": "card",
+        "kind": "card_number"
+      }
+    },
+    {
+      "input": {
+        "cardDetails": {
+          "brand": "visa",
+          "country": "4242-4242-4242-4242"
+        },
+        "outcome": "declined",
+        "reference": "r1"
+      },
+      "name": "a card number inside cardDetails",
+      "refusal": {
+        "field": "cardDetails",
+        "kind": "card_number"
+      }
+    },
+    {
+      "input": {
+        "eventId": "evt_4242424242424242",
+        "outcome": "declined",
+        "reference": "r1"
+      },
+      "name": "a card number in eventId",
+      "refusal": {
+        "field": "eventId",
+        "kind": "card_number"
+      }
+    },
+    {
+      "input": {
+        "declineCode": "4242.4242.4242.4242",
+        "outcome": "declined",
+        "reference": "r1"
+      },
+      "name": "a card number in declineCode",
+      "refusal": {
+        "field": "declineCode",
+        "kind": "card_number"
+      }
+    }
+  ],
+  "site": {
+    "request": {
+      "body": null,
+      "headers": {
+        "accept": "application/json",
+        "user-agent": "hideguard-sdk-fixture/1",
+        "x-api-key": "sk_test_fixture_0123456789"
+      },
+      "method": "GET",
+      "url": "https://hideguard.io/api/v1/site"
+    }
+  },
+  "signingKeys": [
+    {
+      "siteKey": "pk_live_abc",
+      "request": {
+        "body": null,
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1"
+        },
+        "method": "GET",
+        "url": "https://hideguard.io/api/v1/signing-key?siteKey=pk_live_abc"
+      }
+    },
+    {
+      "siteKey": " pk_live_abc ",
+      "request": {
+        "body": null,
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1"
+        },
+        "method": "GET",
+        "url": "https://hideguard.io/api/v1/signing-key?siteKey=pk_live_abc"
+      }
+    },
+    {
+      "siteKey": "pk test/&?=",
+      "request": {
+        "body": null,
+        "headers": {
+          "accept": "application/json",
+          "user-agent": "hideguard-sdk-fixture/1"
+        },
+        "method": "GET",
+        "url": "https://hideguard.io/api/v1/signing-key?siteKey=pk%20test%2F%26%3F%3D"
+      }
+    },
+    {
+      "siteKey": "",
+      "refusal": {
+        "field": "siteKey",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "siteKey": "   ",
+      "refusal": {
+        "field": "siteKey",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "siteKey": "sk_live_x",
+      "refusal": {
+        "field": "siteKey",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "siteKey": "sk_test_fixture_0123456789",
+      "refusal": {
+        "field": "siteKey",
+        "kind": "invalid_argument"
+      }
+    }
+  ],
+  "endpoints": [
+    {
+      "raw": null,
+      "value": "https://hideguard.io"
+    },
+    {
+      "raw": "https://hideguard.io",
+      "value": "https://hideguard.io"
+    },
+    {
+      "raw": "https://hideguard.io/",
+      "value": "https://hideguard.io"
+    },
+    {
+      "raw": " https://HideGuard.IO/ ",
+      "value": "https://hideguard.io"
+    },
+    {
+      "raw": "https://hideguard.io:443",
+      "value": "https://hideguard.io"
+    },
+    {
+      "raw": "https://hideguard.io:8443/",
+      "value": "https://hideguard.io:8443"
+    },
+    {
+      "raw": "https://hideguard.io/base/path//",
+      "value": "https://hideguard.io/base/path"
+    },
+    {
+      "raw": "http://localhost:3000",
+      "value": "http://localhost:3000"
+    },
+    {
+      "raw": "http://127.0.0.1:3000/",
+      "value": "http://127.0.0.1:3000"
+    },
+    {
+      "raw": "http://[::1]:3000",
+      "value": "http://[::1]:3000"
+    },
+    {
+      "raw": "http://hideguard.io",
+      "refusal": {
+        "field": "endpoint",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "raw": "ftp://hideguard.io",
+      "refusal": {
+        "field": "endpoint",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "raw": "https://user:pass@hideguard.io",
+      "refusal": {
+        "field": "endpoint",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "raw": "https://hideguard.io/?x=1",
+      "refusal": {
+        "field": "endpoint",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "raw": "https://hideguard.io/#top",
+      "refusal": {
+        "field": "endpoint",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "raw": "https://hideguard.io?",
+      "refusal": {
+        "field": "endpoint",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "raw": "hideguard.io",
+      "refusal": {
+        "field": "endpoint",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "raw": "not a url",
+      "refusal": {
+        "field": "endpoint",
+        "kind": "invalid_argument"
+      }
+    }
+  ],
+  "secrets": [
+    {
+      "raw": "sk_live_abc",
+      "value": "sk_live_abc"
+    },
+    {
+      "raw": "  sk_live_abc  ",
+      "value": "sk_live_abc"
+    },
+    {
+      "raw": "",
+      "refusal": {
+        "field": "secretKey",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "raw": "   ",
+      "refusal": {
+        "field": "secretKey",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "raw": null,
+      "refusal": {
+        "field": "secretKey",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "raw": 42,
+      "refusal": {
+        "field": "secretKey",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "raw": "pk_live_abc",
+      "refusal": {
+        "field": "secretKey",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "raw": "PK_live_abc",
+      "refusal": {
+        "field": "secretKey",
+        "kind": "invalid_argument"
+      }
+    },
+    {
+      "raw": "sk_live\nabc",
+      "refusal": {
+        "field": "secretKey",
+        "kind": "invalid_argument"
+      }
+    }
+  ]
+}
